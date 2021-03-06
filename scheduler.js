@@ -15,6 +15,12 @@ THEN the saved events persist
 */
 
 const currentDay = document.getElementById('currentDay')
-const timeBlocks = document.getElementById('timeBlocks')
+const timeBlocks = document.getElementsByClassName('textarea')
+
 
 currentDay.textContent = moment().format('dddd')
+let currentHour = moment().format('kk')
+
+for (i=0; i < timeBlocks.length; i++){
+    (moment().format('kk'))
+}
