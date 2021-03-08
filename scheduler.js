@@ -16,11 +16,20 @@ THEN the saved events persist
 
 const currentDay = document.getElementById('currentDay')
 const timeBlocks = document.getElementsByClassName('textarea')
+//const hour = document.getElementsByClassName('hour')
 
+currentDay.textContent = moment().format('dddd MMMM Do')
+let currentHour = moment().format('HH')
 
-currentDay.textContent = moment().format('dddd')
-let currentHour = moment().format('kk')
 
 for (i=0; i < timeBlocks.length; i++){
-    (moment().format('kk'))
+    if (timeBlocks[i].dataset.hour < currentHour) {
+        timeBlocks[i].classList.remove('present')
+        timeBlocks[i].classList.add('past')
+    } else if(timeBlocks[i].dataset.hour = currentHour) {
+        timeBlocks[i].classList.remove('future')
+        timeBlocks[i].classList.add('present')
+    } else if(timeBlocks[i].dataset.hour > currentHour) {
+        timeBlocks[i].classList.add('future')
+    }
 }
