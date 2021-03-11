@@ -14,34 +14,43 @@ WHEN I refresh the page
 THEN the saved events persist
 */
 
-const currentDay = document.getElementById("currentDay");
-const timeBlocks = document.getElementsByClassName("textarea");
-//const hour = document.getElementsByClassName('hour')
+const currentDay = $("#currentDay");
+const timeBlocks = $(".textarea");
 
-currentDay.textContent = moment().format("dddd MMMM Do");
+currentDay.text(moment().format("dddd MMMM Do"));
 let currentHour = moment().format("HH");
 
-for (i = 0; i < timeBlocks.length; i++) {
+timeBlocks.each(function () {
+  if ($(this).attr("data-hour") < currentHour) {
+    $(this).removeClass("present");
+    $(this).addClass("past");
+  } else if ($(this).attr("data-hour") == currentHour) {
+    $(this).removeClass("future");
+    $(this).addClass("present");
+  } else if ($(this).attr("data-hour") > currentHour) {
+    $(this).addClass("future");
+  }
+
+  $(this).text(localStorage.getItem($(this).attr("data-hour")));
+});
+
+/*for (i = 0; i < timeBlocks.length; i++) {
   if (timeBlocks[i].dataset.hour < currentHour) {
     $(timeBlocks[i]).removeClass("present");
     $(timeBlocks[i]).addClass("past");
-    //timeBlocks[i].classList.remove('present')
-    //timeBlocks[i].classList.add('past')
-  } else if (timeBlocks[i].dataset.hour == Math.floor(currentHour)) {
+  } else if (timeBlocks[i].dataset.hour == currentHour) {
     $(timeBlocks[i]).removeClass("future");
     $(timeBlocks[i]).addClass("present");
-    //timeBlocks[i].classList.remove("future");
-    //timeBlocks[i].classList.add("present");
   } else if (timeBlocks[i].dataset.hour > currentHour) {
     $(timeBlocks[i]).addClass("future");
-    //timeBlocks[i].classList.add("future");
   }
 
-  //$(timeBlocks[i]).on("click", "button", function () {
-  //console.log($(this).prev().val());
-  //});
-}
+  timeBlocks[i].textContent = localStorage.getItem(timeBlocks[i].dataset.hour);
+}*/
 
 $("button").click(function () {
-  console.log($(this).prev().val());
+  let occasion = $(this).prev().val();
+  let occasionKey = $(this).prev().attr("data-hour");
+  console.log(occasion);
+  localStorage.setItem(occasionKey, occasion);
 });
