@@ -14,22 +14,26 @@ WHEN I refresh the page
 THEN the saved events persist
 */
 
-const currentDay = document.getElementById('currentDay')
-const timeBlocks = document.getElementsByClassName('textarea')
+const currentDay = document.getElementById("currentDay");
+const timeBlocks = document.getElementsByClassName("textarea");
 //const hour = document.getElementsByClassName('hour')
 
-currentDay.textContent = moment().format('dddd MMMM Do')
-let currentHour = moment().format('HH')
+currentDay.textContent = moment().format("dddd MMMM Do");
+let currentHour = moment().format("HH");
 
-
-for (i=0; i < timeBlocks.length; i++){
-    if (timeBlocks[i].dataset.hour < currentHour) {
-        timeBlocks[i].classList.remove('present')
-        timeBlocks[i].classList.add('past')
-    } else if(timeBlocks[i].dataset.hour == Math.floor(currentHour)) {
-        timeBlocks[i].classList.remove('future')
-        timeBlocks[i].classList.add('present')
-    } else if(timeBlocks[i].dataset.hour > currentHour) {
-        timeBlocks[i].classList.add('future')
-    }
+for (i = 0; i < timeBlocks.length; i++) {
+  if (timeBlocks[i].dataset.hour < currentHour) {
+    $(timeBlocks[i]).removeClass("present");
+    $(timeBlocks[i]).addClass("past");
+    //timeBlocks[i].classList.remove('present')
+    //timeBlocks[i].classList.add('past')
+  } else if (timeBlocks[i].dataset.hour == Math.floor(currentHour)) {
+    $(timeBlocks[i]).removeClass("future");
+    $(timeBlocks[i]).addClass("present");
+    //timeBlocks[i].classList.remove("future");
+    //timeBlocks[i].classList.add("present");
+  } else if (timeBlocks[i].dataset.hour > currentHour) {
+    $(timeBlocks[i]).addClass("future");
+    //timeBlocks[i].classList.add("future");
+  }
 }
