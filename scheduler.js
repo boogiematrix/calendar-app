@@ -36,4 +36,12 @@ for (i = 0; i < timeBlocks.length; i++) {
     $(timeBlocks[i]).addClass("future");
     //timeBlocks[i].classList.add("future");
   }
+
+  //$(timeBlocks[i]).on("click", "button", function () {
+  //console.log($(this).prev().val());
+  //});
 }
+
+$("button").click(function () {
+  console.log($(this).prev().val());
+});
