@@ -22,7 +22,7 @@ timeBlocks.each(function () {
 
 //saves text from the textarea in local storage. it is keyed to the hour
 $("button").click(function () {
-  let occasion = $(this).prev().val();
-  let occasionKey = $(this).prev().attr("data-hour");
+  let occasion = $(this).siblings('textarea').val();
+  let occasionKey = $(this).siblings('textarea').attr("data-hour");
   localStorage.setItem(occasionKey, occasion);
 });
